@@ -1,5 +1,3 @@
-#! /usr/local/bin/python
-
 import sys
 import os
 import re
@@ -16,10 +14,10 @@ import socket
 import cgi
 
 SMTPserver = 'smtp.mailgun.org'
-sender =     'sender@send.com'
-destination = ['dest@dest.com']
-USERNAME = "it@mail.com"
-PASSWORD = "pass"
+sender =     'kevin@kevinholland.me'
+destination = ['kevinholland94@gmail.com']
+USERNAME = "kevin@kevinholland.me"
+PASSWORD = "thisismymailgunpassword"
 # typical values for text_subtype are plain, html, xml
 text_subtype = 'plain'
 
@@ -31,12 +29,12 @@ def send_mail(name, email, subject, message):
     Message: {}\n
     """
 
-    subject=name + " contacted you from your portfolio"
+    e_subject=name + " contacted you from your portfolio"
     content=template.format(name, email, subject, message)
 
     try:
         msg = MIMEText(content, text_subtype)
-        msg['Subject']=       subject
+        msg['Subject']=       e_subject
         msg['From']   = sender # some SMTP servers will do this automatically, not all
 
         conn = SMTP(SMTPserver)
@@ -47,7 +45,7 @@ def send_mail(name, email, subject, message):
         finally:
             conn.quit()
 
-    except Exception, exc:
+    except Exception as exc:
         sys.exit( "mail failed; %s" % str(exc) ) # give a error message
 
 
@@ -69,7 +67,7 @@ class S(BaseHTTPRequestHandler):
                 form['message'].value
             )
             self.send_response(200)
-        except Exception, exc:
+        except Exception as exc:
             print(Exception, exc)
             self.send_response(500)
         finally:
@@ -82,7 +80,7 @@ class S(BaseHTTPRequestHandler):
 def run(server_class=HTTPServer, handler_class=S, port=9090):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
-    print 'Starting httpd...'
+    print('Starting httpd...')
     httpd.serve_forever()
 
 if __name__ == "__main__":
