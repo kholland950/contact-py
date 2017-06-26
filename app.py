@@ -14,9 +14,9 @@ import socket
 import cgi
 
 SMTPserver = 'smtp.mailgun.org'
-sender =     'kevin@kevinholland.me'
-destination = ['kevinholland94@gmail.com']
-USERNAME = "kevin@kevinholland.me"
+sender =     'name@whatever.me'
+destination = ['destination@gmail.com']
+USERNAME = "name@whatever.me"
 PASSWORD = "thisismymailgunpassword"
 # typical values for text_subtype are plain, html, xml
 text_subtype = 'plain'
